@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-
+e1 = cv.getTickCount()
 def resize(i, r, c):
     new_c = (np.arange(c)*i.shape[1] / c).astype(int)
     new_r = (np.arange(r)*i.shape[0] / r).astype(int)
@@ -19,7 +19,8 @@ mask2[350:450, 450:550] = 0
 
 Imask2= cv.bitwise_and(fih2, fih2, mask= mask2)
 Imask = cv.bitwise_and( fih1,fih1, mask = mask)
-cv.imshow("end", cv.bitwise_or(Imask,Imask2))
+cv.imshow("end", cv.cvtColor((cv.bitwise_or(Imask,Imask2)), cv.COLOR_BGR2HSV))
 #cv.imshow("ggg" , Imask2)
 cv.waitKey(0)
+print(f"the time that took this code to execute is : {int((cv.getTickCount() - e1)/ cv.getTickFrequency())} Second")
 cv.destroyAllWindows()
